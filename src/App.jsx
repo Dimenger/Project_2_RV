@@ -5,7 +5,10 @@ import './App.css';
 
 function currentYear() {
 	return new Date().getFullYear();
-}
+} // Функция на js - императивный стиль
+
+//  всё что ниже декларативный стиль React, кроме элемента setInterval в useEffect, который устанавливает промежуток времени,
+//  это императивный стиль
 
 export function App() {
 	const [count, setCount] = useState(0); // Счётчик кликов
