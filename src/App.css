@@ -37,6 +37,11 @@
   padding: 2em;
 }
 
+.cardYear {
+	padding: 2em;
+	font-weight: bold;
+}
+
 .read-the-docs {
   color: #888;
 }
