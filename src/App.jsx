@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect, createElement } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
@@ -24,30 +24,44 @@ export function App() {
 		return () => clearInterval(timerId); // Очистка интервала при удалении компонента
 	}, []);
 
-	return (
-		<>
-			<div>
-				<a href="https://vite.dev" target="_blank">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button onClick={() => setCount(count + 1)}>count is {count}</button>
-				<p>{currentTime}</p> {/* Показываем текущее время */}
-				<p>
-					Edit <code>src/App.jsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-			<div className="cardYear">
-				<p>Год: {currentYearValue}</p> {/* Добавляем отображение текущего года */}
-			</div>
-		</>
+	function renderLink(href, imgSrc, altText) {
+		return createElement('a', { href, target: '_blank' }, [
+			createElement('img', { src: imgSrc, className: 'logo', alt: altText }),
+		]);
+	}
+
+	return createElement(
+		React.Fragment,
+		null,
+		createElement('div', null, [
+			renderLink('https://vite.dev', viteLogo, 'Vite logo'),
+			renderLink('https://react.dev', reactLogo, 'React logo'),
+		]),
+		createElement('h1', null, 'Vite + React'),
+		createElement('div', { className: 'card' }, [
+			createElement(
+				'button',
+				{ onClick: () => setCount(count + 1) },
+				`count is ${count}`,
+			),
+			createElement('p', null, currentTime),
+			createElement(
+				'p',
+				null,
+				'Edit ',
+				createElement('code', null, 'src/App.js'),
+				' and save to test HMR',
+			),
+		]),
+		createElement(
+			'p',
+			{ className: 'read-the-docs' },
+			'Click on the Vite and React logos to learn more',
+		),
+		createElement(
+			'div',
+			{ className: 'cardYear' },
+			createElement('p', null, `Год: ${currentYearValue}`),
+		),
 	);
 }
